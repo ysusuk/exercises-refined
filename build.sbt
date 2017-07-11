@@ -7,9 +7,11 @@ lazy val root = (project in file("."))
   .disablePlugins(CoursierPlugin)
   .settings(
     name := "exercises-refined",
+    scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
       dep("exercise-compiler"),
       dep("definitions"),
+      "eu.timepit" %% "refined" % "0.8.2",
       %%("shapeless"),
       %%("scalatest"),
       %%("scalacheck"),
