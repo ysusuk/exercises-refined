@@ -23,11 +23,8 @@ import org.scalatest.prop.Checkers
 import shapeless.HNil
 
 class RefinedLibrarySpec extends RefSpec with Checkers {
-  def `function asserts` = {
-    check(Test.testSuccess(NumericSection.functionAssert _, true :: HNil))
+  def `equals 10` = {
+    check(Test.testSuccess(refined.NumericSection.equals10 _, 10 :: 9 :: HNil))
   }
 
-  def `function false asserts` = {
-    check(Test.testSuccess(NumericSection.functionFalseAssert _, false :: HNil))
-  }
 }

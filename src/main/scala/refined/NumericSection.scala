@@ -19,50 +19,34 @@ package refined
 import org.scalatest._
 import org.scalaexercises.definitions._
 
-//import eu.timepit.refined.boolean._
-//import eu.timepit.refined.char._
-//import eu.timepit.refined.collection._
-//import eu.timepit.refined.generic._
-//import eu.timepit.refined.string._
 import eu.timepit.refined._
-import eu.timepit.refined.api.Refined
+import eu.timepit.refined.api._
 import eu.timepit.refined.auto._
 import eu.timepit.refined.numeric._
+import eu.timepit.refined.generic._
 
-/** @param name section_title
+/** @param name Numeric
   */
-object NumericSection extends FlatSpec with Matchers with Section {
+object NumericSection
+    extends FlatSpec
+    with Matchers
+    with Section
+    with EitherValues {
 
-  /** = Numeric =
-    * less and more
+  /** = Equal  =
+    * refineV for values
+    * refineMV only for literal values (literals)
     */
-  def less(): Unit = {
-    // for values
-    val x = 9
-    refineV[Less[W.`10`.T]](x)
-    // only for literals vales
-    val y = 10
-    refineV[Less[W.`10`.T]](y)
+  def equals10(x: Int, y: Int) = {
+    type Equals10 = Int Refined Equal[W.`10`.T]
+
+    val equals10: Either[String, Equals10] = refineV(x)
+    val rightRes: Int = equals10.right.value
+    rightRes shouldBe (x)
+
+    val error: Either[String, Equals10] = refineV(y)
+    val leftRes: String = error.left.value
+    leftRes should be(s"Predicate failed: ($y == 10).")
   }
 
-  /** = Exercise block title =
-    *
-    * Text describing background about the exercise, can be as long as needed.
-    *
-    * {{{
-    *   // Scala code blocks can also be added to enhance your documentation.
-    * }}}
-    *
-    * Also, documentation can be broken in as many paragraphs as necessary.
-    */
-  def functionAssert(res0: Boolean): Unit = {
-    true shouldBe res0
-  }
-
-  /** And obviously you can add as many documentation and exercises as you need
-    * to make your point ;-).
-    */
-  def functionFalseAssert(res0: Boolean): Unit = {
-    false shouldBe res0
-  }
 }
