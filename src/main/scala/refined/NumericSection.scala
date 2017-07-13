@@ -37,16 +37,16 @@ object NumericSection
     * refineV for values
     * refineMV only for literal values (literals)
     */
-  def equals10(x: Int, y: Int) = {
+  def equals10(res0: Int, res1: Int) = {
     type Equals10 = Int Refined Equal[W.`10`.T]
 
-    val equals10: Either[String, Equals10] = refineV(x)
+    val equals10: Either[String, Equals10] = refineV(res0)
     val rightRes: Int = equals10.right.value
-    rightRes shouldBe (x)
+    rightRes shouldBe (res0)
 
-    val error: Either[String, Equals10] = refineV(y)
+    val error: Either[String, Equals10] = refineV(res1)
     val leftRes: String = error.left.value
-    leftRes should be(s"Predicate failed: ($y == 10).")
+    leftRes should be(s"Predicate failed: ($res1 == 10).")
   }
 
 }
