@@ -24,7 +24,15 @@ import shapeless.HNil
 
 class RefinedLibrarySpec extends RefSpec with Checkers {
   def `equals 10` = {
-    check(Test.testSuccess(refined.NumericSection.equals10 _, 10 :: 9 :: HNil))
+    check(Test.testSuccess(refined.NumericSection.equals10 _, 10 :: 8 :: HNil))
+  }
+
+  def `greater 10` = {
+    val res0: Int = 11
+    val res1: Int = 9
+    check(
+      Test.testSuccess(refined.NumericSection.greater10 _,
+                       res0 :: res1 :: HNil))
   }
 
 }
